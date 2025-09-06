@@ -40,7 +40,7 @@ pipeline {
     }
     post {
         success {
-            ech "🚀 Website deployed successfully on Kubernetes!"
+            echo "🚀 Website deployed successfully on Kubernetes!"
         }
         failure {
             echo "❌ Deployment failed!"
