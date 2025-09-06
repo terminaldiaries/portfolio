@@ -26,7 +26,7 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: "${REGISTRY_CREDENDIALS}",usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: "${REGISTRY_CREDENTIALS}",usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     script {
                         sh """
                             echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
@@ -37,15 +37,6 @@ pipeline {
                 }
             }
         }
-
-        /*stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    // apply manifests (deployment + service)
-                    sh "kubectl apply -f k8s/deployment.yml"
-                }
-            }
-        }*/
     }
     post {
         success {
