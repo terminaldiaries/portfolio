@@ -37,6 +37,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    // apply manifest deployment
+                    sh "kubectl apply -f k8s/deployment.yml"
+                }
+            }
+        }
     }
     post {
         success {
